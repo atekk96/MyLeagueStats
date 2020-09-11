@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+	<head>
+		<title>Welcome to my site</title>
+		<link type="text/css" 
+			  rel="stylesheet" 
+			  href="${pageContext.request.contextPath}/resources/css/style.css" />
+	</head>
+	<body>
+		<form th:action="@{/myLeagueStats/player}" th:object="${score}" method="GET">
+			<select th:field="*{player}">
+				<option value="Artur" label="Artur">
+				<option value="Ania" label="Ania">
+			</select>
+			<input type="submit" value="Dalej" class="add-button" />
+		</form>
+	</body>
+</html>

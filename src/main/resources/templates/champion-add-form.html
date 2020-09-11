@@ -1,0 +1,90 @@
+<html xmlns:th="http:/www.thymeleaf.org">
+	<head>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  		<link rel="stylesheet" href="/resources/demos/style.css">
+  		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  		<script>
+ 			$( function() { 
+ 			var availableChamps = ["Aatrox", "Ahri", "Akali", "Alistar", "Amumu", "Anivia", "Annie", "Aphelios", "Ashe", "Aurelion Sol", "Azir", "Bard", "Blitzcrank", "Brand", "Braum", "Caitlyn", "Camille", "Cassiopeia", "Cho'Gath", "Corki", "Darius", "Diana", "Dr. Mundo", "Draven", "Ekko", "Elise", "Evelynn", "Ezreal", "Fiddlesticks", "Fiora", "Fizz", "Galio", "Gangplank", "Garen", "Gnar", "Gragas", "Graves", "Hecarim", "Heimerdinger", "Illaoi", "Irelia", "Ivern", "Janna", "Jarvan IV", "Jax", "Jayce", "Jhin", "Jinx", "Kai'Sa", "Kalista", "Karma", "Karthus", "Kassadin", "Katarina", "Kayle", "Kayn", "Kennen", "Kha'Zix", "Kindred", "Kled", "Kog'Maw", "LeBlanc", "Lee Sin", "Leona", "Lissandra", "Lucian", "Lulu", "Lux", "Malphite", "Malzahar", "Maokai", "Master Yi", "Miss Fortune", "Mordekaiser", "Morgana", "Nami", "Nasus", "Nautilus", "Neeko", "Nidalee", "Nocturne", "Nunu", "Olaf", "Orianna", "Ornn", "Pantheon", "Poppy", "Pyke", "Qiyana", "Quinn", "Rakan", "Rammus", "Rek'Sai", "Renekton", "Rengar", "Riven", "Rumble", "Ryze", "Sejuani", "Senna", "Sett", "Shaco", "Shen", "Shyvana", "Singed", "Sion", "Sivir", "Skarner", "Sona", "Soraka", "Swain", "Sylas", "Syndra", "Tahm Kench", "Taliyah", "Talon", "Taric", "Teemo", "Thresh", "Tristana", "Trundle", "Tryndamere", "Twisted Fate", "Twitch", "Udyr", "Urgot", "Varus", "Vayne", "Veigar", "Vel'Koz", "Vi", "Viktor", "Vladimir", "Volibear", "Warwick", "Wukong", "Xayah", "Xerath", "Xin Zhao", "Yasuo", "Yorick", "Yuumi", "Zac", "Zed", "Ziggs", "Zilean", "Zoe", "Zyra"];
+    		$( "#tags" ).autocomplete({
+      		source: availableChamps,
+      		minLength: 2
+    		});
+  		} );
+ 			function goBack() 
+ 			{
+ 			    window.history.back();
+ 			}
+	</script>
+		<title>Save champion!</title>
+		<link type="text/css"
+			  rel="stylesheet"
+			  href="${pageContext.request.contextPath}/resources/css/style.css " />
+		<link type="text/css"
+			  rel="stylesheet"
+			  href="${pageContext.request.contextPath}/resources/css/add-champion-style.css " />
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<h2>Add a new champ bud!</h2>
+			</div>
+		</div>
+		<div id="container">
+			<h3>Add a game!</h3>
+			<p th:if="${ifExist != null}">Nie ma takiego champa </p>
+			<form th:action="@{/myLeagueStats/addChampion}" th:object="${newScore}" method="POST">
+				<input type="hidden" th:field="*{idScore}" />
+				<table>
+					<tbody>
+						<tr>
+							<td><label>Player</label></td>
+						<td>
+							<select th:field="*{player}">
+								<option value="Ania" label="Ania" selected>Ania</option>
+								<option value="Artur" label="Artur">Artur</option>
+							</select>
+						</td>
+						</tr>
+						<tr>
+							<td><label>Champion</label></td>
+							<td>
+								<input id="tags" th:field="*{champion}" />
+							</td>
+						</tr>
+						<tr>
+							<td><label>Lane</label></td>
+							<td><select th:field="*{lane}">
+								<option value="top">Top</option>
+								<option value="jungle">Jungle</option>
+								<option value="mid">Mid</option>
+								<option value="adc">Adc</option>
+								<option value="Support">Support</option>
+							</select>
+						</tr>
+						<tr>
+							<td><label>Kills</label></td>
+							<td><input th:field="*{kills}" pattern="^[0-9]*$" title="Numbers only!" /></td>
+						</tr>
+						<tr>
+							<td><label>Deaths</label></td>
+							<td><input th:field="*{deaths}" pattern="^[0-9]*$" title="Numbers only!" /></td>
+						</tr>
+						<tr>
+							<td><label>Assists</label></td>
+							<td><input th:field="*{assists}" pattern="^[0-9]*$" title="Numbers only!" /></td>
+						</tr>
+						<tr>
+							<td><label></label></td>
+							<td><input type="submit" value="Add" class="save" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+				<p>
+					<button onclick="goBack()">Back to the list</a>
+				</p>
+		</div>
+	</body>
+</html>
